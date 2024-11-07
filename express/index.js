@@ -84,3 +84,14 @@ app.get("/nations/:id", (req, res) => {
     }
   });
 });
+
+// 저장기능
+app.post("/nations/save", (req) => {
+  const { name, capital, population } = req.body;
+  console.log(`name: ${name}, capital: ${capital}, population: ${population}`);
+  const sql =
+    "insert into nations_table(name, capital, population) values(?,?,?)";
+  db.query(sql, [name, capital, population], (err, results, fields) => {
+    console.log("err", err);
+  });
+});
